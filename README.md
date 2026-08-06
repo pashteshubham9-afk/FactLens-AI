@@ -8,9 +8,12 @@ A working, end-to-end fake news checker that combines **Machine Learning** and *
 
 ## 👨‍💻 Developer
 
-**Shubham Pashte
-Mangesh Kavalekar**
+**Shubham Pashte**
 Computer Science Engineering
+
+**Mangesh Kavalekar**
+Information Technology
+
 
 > Replace the line above with your name / team members before submitting.
 
