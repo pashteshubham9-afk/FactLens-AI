@@ -1,276 +1,731 @@
-# 🧠 Fake News Detection System
+# 🧠 FactLens AI
 
-## AI-Powered Fake News Detection & Live Verification Tool
+## AI-Powered Fake News Detection, Fact Verification & Source Analysis System
 
-A working, end-to-end fake news checker that combines **Machine Learning** and **real-time news verification** to judge whether a news claim is likely real or fake — and explains exactly how it reached that answer.
+FactLens AI is an intelligent fake news detection and verification platform that combines **Machine Learning, Natural Language Processing, Fact Verification, Live News Search, and Generative AI** to analyze news claims and provide an understandable verification report.
+
+The system does not only predict whether a statement looks fake or real based on text patterns, but also verifies information using external sources and provides explanations with supporting evidence.
 
 ---
 
-## 👨‍💻 Developer
+# 🚀 Project Overview
+
+Fake news has become one of the biggest challenges in the digital world. Millions of misleading articles and social media posts are created every day, making it difficult for users to identify trustworthy information.
+
+Traditional fake news detection models mainly depend on previously trained datasets. Such models can identify writing patterns but cannot understand whether a new event actually happened.
+
+FactLens AI solves this problem by combining multiple verification layers:
+
+### 1. Machine Learning Detection
+
+The ML model analyzes the writing style and language patterns of news content.
+
+Technologies used:
+
+- TF-IDF Vectorization
+- Logistic Regression Classification
+- Probability-based confidence scoring
+
+---
+
+### 2. Fact Knowledge Base Verification
+
+FactLens AI contains a custom fact database that compares user claims with stored verified information.
+
+It uses:
+
+- NLP text similarity
+- TF-IDF similarity matching
+- Cosine similarity scoring
+
+This helps identify known true and false claims.
+
+---
+
+### 3. Live News Verification
+
+The system connects with live news sources using NewsAPI.
+
+It checks:
+
+- Whether trusted sources are reporting the same information
+- Related articles
+- Source details
+- Current coverage
+
+---
+
+### 4. AI Explanation Engine
+
+Using Generative AI, FactLens provides a detailed explanation:
+
+- Final verdict
+- Reason behind decision
+- Supporting facts
+- Source analysis
+- Simple human-readable explanation
+
+---
+
+# ⭐ Key Features
+
+## 🤖 AI Powered Verification
+
+- Machine Learning prediction
+- Fact checking
+- AI generated explanations
+- Confidence score
+
+
+## 🌐 Live Source Verification
+
+- Real-time news search
+- Related article display
+- Source credibility information
+
+
+## 📚 Fact Database
+
+- Custom knowledge base
+- Similarity based matching
+- Verified information comparison
+
+
+## 📊 Smart Decision System
+
+Combines:
+
+Machine Learning
+        +
+Fact Verification
+        +
+Live News Search
+        +
+AI Explanation
+
+to generate the final result.
+
+
+## 🖥️ Streamlit Web Application
+
+Provides:
+
+- User-friendly interface
+- Demo examples
+- Instant analysis
+- Result dashboard
+
+
+---
+
+# 🏗️ System Architecture
+
+
+             User News Claim
+
+                   |
+
+                   ▼
+
+          Text Preprocessing
+
+          (Cleaning + NLP)
+
+                   |
+
+                   ▼
+
+
+    ┌────────────────────────┐
+    │ Fact Knowledge Base     │
+    │   facts.csv             │
+    └──────────┬─────────────┘
+
+               |
+
+               ▼
+
+
+    ┌────────────────────────┐
+    │ Live News Verification  │
+    │       NewsAPI            │
+    └──────────┬─────────────┘
+
+               |
+
+    ┌──────────┴──────────┐
+
+    ▼                     ▼
+   Verified Source       No Match
+    |                     |
+
+    ▼                     ▼
+
+
+ REAL RESULT      ML Prediction
+
+
+                          |
+
+                          ▼
+
+
+             TF-IDF + Logistic Regression
+
+
+                          |
+
+                          ▼
+
+
+                Final Verdict
+
+                          |
+
+                          ▼
+
+
+                AI Explanation Report
+
+---
+
+# 🛠️ Technologies Used
+
+
+| Category | Technology |
+|---|---|
+| Programming Language | Python |
+| Machine Learning | Scikit-learn |
+| NLP | TF-IDF Vectorizer |
+| Algorithm | Logistic Regression |
+| Data Processing | Pandas, NumPy |
+| Web Framework | Streamlit |
+| AI Model | OpenAI API |
+| Live Verification | NewsAPI |
+| Model Saving | Joblib |
+| Version Control | Git & GitHub |
+
+
+---
+
+# 📂 Project Structure
+
+
+FactLens-AI/
+│
+├── app.py
+├── train.py
+├── predict.py
+│
+├── ai_model.py
+├── ai_explainer.py
+├── logic.py
+├── news_search.py
+├── live_check.py
+├── utils.py
+├── config.py
+│
+├── dataset/
+│   ├── news.csv
+│   └── facts.csv
+│
+├── fake_news_model.pkl
+│
+├── requirements.txt
+│
+└── README.md
+
+---
+
+# ⚙️ Installation Guide
+
+
+## Step 1: Clone Repository
+
+
+```bash
+git clone https://github.com/pashteshubham9-afk/FactLens-AI.git
+Move into folder:
+cd FactLens-AI
+Step 2: Create Virtual Environment
+python -m venv venv
+Activate:
+Windows
+venv\Scripts\activate
+Linux/Mac
+source venv/bin/activate
+Step 3: Install Dependencies
+pip install -r requirements.txt
+🔑 API Configuration
+NewsAPI Setup
+Create account:
+https://newsapi.org/register
+Add API key in:
+config.py
+Example:
+NEWSAPI_KEY="your_newsapi_key"
+OpenAI API Setup
+Add:
+OPENAI_API_KEY="your_openai_key"
+This enables AI generated verification reports.
+🧠 Machine Learning Model
+Algorithm Used
+TF-IDF + Logistic Regression
+TF-IDF
+Converts text into numerical features by calculating word importance.
+Example:
+News Text
+
+↓
+
+Important Word Features
+
+↓
+
+Machine Learning Input
+Logistic Regression
+Classification:
+0 → Fake News
+
+1 → Real News
+The model also provides confidence probability.
+📚 Dataset Information
+The project uses labeled news data containing:
+Real news examples
+Fake news examples
+Different categories
+Various writing styles
+Dataset categories include:
+Politics
+Sports
+Technology
+Health
+Business
+General News
+The dataset can be replaced with larger public datasets such as:
+ISOT Fake News Dataset
+LIAR Dataset
+Kaggle Fake and Real News Dataset
+
+
+# 🔄 Working Process
+
+
+## Step 1: User Input
+
+User enters a news claim in the FactLens AI application.
+
+
+Example:
+
+Cristiano Ronaldo plays football
+
+
+---
+
+## Step 2: Text Processing
+
+The system cleans the input:
+
+- Converts text to lowercase
+- Removes unnecessary characters
+- Removes noise
+- Prepares text for analysis
+
+
+---
+
+## Step 3: Fact Verification
+
+The claim is compared with the internal fact database.
+
+The system calculates similarity between:
+
+User Claim
+    +
+Stored Facts
+
+
+If a strong match is found, the fact verification result is generated.
+
+
+---
+
+## Step 4: Live News Search
+
+
+The system searches online news sources using NewsAPI.
+
+
+It checks:
+
+- Matching headlines
+- News articles
+- Publishing sources
+- Current reports
+
+
+---
+
+## Step 5: ML Prediction
+
+
+If live verification is unavailable, the ML model predicts using:
+
+
+Input Text
+↓
+TF-IDF Feature Extraction
+↓
+Logistic Regression
+↓
+Prediction + Confidence Score
+
+
+---
+
+## Step 6: AI Explanation
+
+
+The AI engine generates:
+
+- Final verdict
+- Reasoning
+- Supporting information
+- Source analysis
+- Easy explanation
+
+
+---
+
+# 🧪 Testing Examples
+
+
+## Example 1: Fake News Detection
+
+
+Input:
+
+Virat Kohli won FIFA World Cup
+
+
+Output:
+
+❌ FAKE NEWS DETECTED
+Reason:
+No verified sources found and fact database does not support the claim.
+
+
+---
+
+
+## Example 2: Real Information
+
+
+Input:
+
+Lionel Messi won FIFA World Cup 2022
+
+
+Output:
+
+✅ REAL NEWS
+Verified from available information and sources.
+
+
+---
+
+
+## Example 3: General Fact
+
+
+Input:
+
+Python is a programming language
+
+
+Output:
+
+✅ REAL NEWS
+
+
+---
+
+# 📊 Result Analysis
+
+
+FactLens AI provides:
+
+
+### Prediction
+
+REAL / FAKE
+
+
+### Confidence Score
+
+Example:
+
+Confidence: 92.45%
+
+
+### Evidence
+
+- Matching facts
+- Related sources
+- AI explanation
+
+
+---
+
+# 🎯 Advantages
+
+
+✅ Hybrid AI + Machine Learning approach
+
+✅ Real-time news verification
+
+✅ Explainable AI output
+
+✅ Fact-based verification
+
+✅ Confidence score generation
+
+✅ User-friendly Streamlit interface
+
+✅ Offline ML fallback support
+
+✅ Suitable for educational and research purposes
+
+
+---
+
+# ⚠️ Limitations
+
+
+Although FactLens AI provides advanced verification, some limitations exist:
+
+
+- Breaking news may not appear immediately in external APIs
+
+- Regional and non-English news coverage may be limited
+
+- Satirical content can be difficult to classify
+
+- A missing news result does not always mean fake
+
+- No AI system can guarantee 100% worldwide fact verification
+
+
+---
+
+# 🔮 Future Improvements
+
+
+Future versions can include:
+
+
+## Advanced AI Models
+
+- BERT based transformer models
+- Large Language Models
+- Better contextual understanding
+
+
+## Multilingual Support
+
+Support for:
+
+- Marathi
+- Hindi
+- Other regional languages
+
+
+## Source Credibility System
+
+Add:
+
+- Website reputation scoring
+- Author verification
+- Trust ranking
+
+
+## Browser Extension
+
+Allow users to verify news directly while browsing.
+
+
+## Social Media Integration
+
+Analyze:
+
+- Twitter/X posts
+- Facebook posts
+- Viral content
+
+
+---
+
+# 🎓 Viva Questions & Answers
+
+
+## Q1. What is the main objective of this project?
+
+
+Answer:
+
+The objective is to detect misleading news and provide verification using Machine Learning, live sources, and AI explanation.
+
+
+---
+
+## Q2. Which Machine Learning algorithm is used?
+
+
+Answer:
+
+TF-IDF is used for feature extraction and Logistic Regression is used for classification.
+
+
+---
+
+## Q3. Why not use only Machine Learning?
+
+
+Answer:
+
+A normal ML model only learns patterns from old data. It cannot know whether a new event actually happened, therefore live verification is added.
+
+
+---
+
+## Q4. Why use NewsAPI?
+
+
+Answer:
+
+NewsAPI provides access to current news articles from multiple sources, helping the system verify recent claims.
+
+
+---
+
+## Q5. Why use Streamlit?
+
+
+Answer:
+
+Streamlit allows quick development of an interactive machine learning web application using Python.
+
+
+---
+
+## Q6. What is the future scope?
+
+
+Answer:
+
+Future improvements include transformer models, multilingual support, better source credibility scoring, and browser extension integration.
+
+
+---
+
+# 🌐 Project Links
+
+
+## GitHub Repository
+
+https://github.com/pashteshubham9-afk/FactLens-AI
+
+
+## Live Streamlit Application
+
+https://factlens-ai-mnqpcgcrm3yv2bi6vtepsg.streamlit.app/
+
+
+## Documentation Links
+
+
+Python:
+
+https://www.python.org/
+
+
+Streamlit:
+
+https://streamlit.io/
+
+
+Scikit-learn:
+
+https://scikit-learn.org/
+
+
+NewsAPI:
+
+https://newsapi.org/
+
+
+OpenAI:
+
+https://openai.com/
+
+
+---
+
+# 📸 Project Screenshots
+
+
+## FactLens AI Dashboard
+
+
+![FactLens AI Home](screenshots/home.png)
+
+
+
+## News Analysis Result
+
+
+![News Result](screenshots/result.png)
+
+
+
+## AI Explanation Output
+
+
+![AI Explanation](screenshots/ai_explanation.png)
+
+
+
+---
+
+# 📜 License
+
+
+This project is developed for educational and research purposes.
+
+
+---
+
+# 👨‍💻 Developers
+
+
+## Main Developer
+
 
 **Shubham Pashte**
+
 Computer Science Engineering
 
+
+
+## Second Developer
+
+
 **Mangesh Kavalekar**
+
 Information Technology
 
 
-> Replace the line above with your name / team members before submitting.
-
 ---
 
-## 🚀 Project Overview
-
-Most student fake-news projects train a classifier on a fixed dataset and stop there. The problem: an offline model only learns **writing style** (sensational wording vs. measured wording) — it has no way to know whether something that happened *yesterday* is actually true, and it can be fooled by a calmly-worded fake headline.
-
-This project fixes that with a **two-layer verification approach**:
-
-### Layer 1 — Live News Verification (primary)
-- Real-time search across **150,000+ global sources** via the free [NewsAPI](https://newsapi.org/)
-- Checks whether real outlets are actually reporting the claim
-- Returns matching articles + sources when found
-
-### Layer 2 — Machine Learning Fallback
-- **TF-IDF** vectorization (unigram + bigram)
-- **Logistic Regression** classifier
-- Confidence score output
-- Used automatically when live-check is off, unavailable, or finds no match
-
-### Extra — Red-Flag Phrase Check
-- A small curated list of sensational phrases ("miracle cure", "you won't believe", "government is hiding", etc.) shown alongside the prediction for transparency — not used as a hard rule.
-
----
-
-## ⚠️ Please read this before you present it
-
-You may be tempted to say this "detects any real and fake news in the world." Be careful with that claim in front of a teacher — here's the honest version:
-
-- **No offline text classifier can do that reliably.** It only recognizes style, not facts.
-- **The live-check layer is what gets you close.** It asks real news sources in real time "is anyone reporting this?" — genuinely more general and powerful than the offline model alone.
-- **Even that has limits.** Brand-new breaking news, satire, non-English/regional stories, or a real claim phrased very differently from how outlets worded it can come back "not found." That means *not confirmed*, not *proven fake*. The app says this explicitly instead of pretending to be 100% certain.
-
-In short: this is a genuinely working, honestly-explained project — not a universal fact-checker. No one has built one of those, at any company.
-
----
-
-## 🏗️ System Architecture
-
-```
-                User News Claim
-                       │
-                       ▼
-               Text Preprocessing
-             (utils.py — clean/lowercase)
-                       │
-                       ▼
-            ┌─────────────────────┐
-            │   Live News Check    │
-            │  (live_check.py →     │
-            │   NewsAPI /v2/every-  │
-            │   thing search)       │
-            └──────────┬───────────┘
-                        │
-        Found match? ───┼─── Yes → REAL (with sources)
-                        │
-                       No / API off
-                        ▼
-            ┌─────────────────────┐
-            │   ML Fallback Model   │
-            │  TF-IDF + Logistic    │
-            │  Regression            │
-            └──────────┬───────────┘
-                        ▼
-              Red-Flag Phrase Check
-                        │
-                        ▼
-              Final Verdict + Confidence
-```
-
----
-
-## 📂 Project Structure
-
-```
-fake-news-detection/
-├── dataset/
-│   └── news.csv           # labeled training data (text, label)
-├── generate_dataset.py    # (re)builds dataset/news.csv from templates
-├── train.py                # trains the ML model, prints accuracy, saves .pkl
-├── predict.py               # command-line checker (live check + ML fallback)
-├── app.py                   # Streamlit web app (live check + ML fallback)
-├── live_check.py             # live news lookup via NewsAPI
-├── config.py                  # where you put your free NewsAPI key
-├── utils.py                    # shared text-cleaning + red-flag helper
-├── requirements.txt
-└── README.md
-```
-
----
-
-## 🛠️ Technologies Used
-
-| Category | Tools |
-|---|---|
-| Language | Python |
-| Machine Learning | scikit-learn, TF-IDF Vectorizer, Logistic Regression |
-| Data Processing | pandas, NumPy |
-| Web Framework | [Streamlit](https://streamlit.io/) |
-| Live Verification API | [NewsAPI](https://newsapi.org/) |
-
----
-
-## ⚙️ Installation Guide
-
-### 1. Open in VS Code
-Unzip the project folder and open it in VS Code (`File > Open Folder`), then open a terminal with `` Ctrl+` `` (Windows/Linux) or `` Cmd+` `` (Mac).
-
-### 2. Create a virtual environment (recommended)
-```bash
-python -m venv venv
-```
-Activate it:
-- **Windows:** `venv\Scripts\activate`
-- **Mac/Linux:** `source venv/bin/activate`
-
-VS Code will usually prompt "Select Interpreter" — pick the one inside `venv`.
-
-### 3. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Turn on live checking (optional but recommended)
-1. Register for a free key at **[newsapi.org/register](https://newsapi.org/register)** — no credit card required.
-2. Copy your API key from the [NewsAPI dashboard](https://newsapi.org/account).
-3. Open `config.py` and paste it in:
-   ```python
-   NEWSAPI_KEY = "paste-your-key-here"
-   ```
-4. Done — `predict.py` and `app.py` will now check live coverage before falling back to the ML model.
-
-Skip this step and everything still works — it just runs on the offline ML model only, and the app tells the user that's what's happening.
-
-### 5. Train the ML fallback model
-```bash
-python train.py
-```
-Reads `dataset/news.csv`, trains the TF-IDF + Logistic Regression pipeline, prints accuracy/precision/recall, and saves `fake_news_model.pkl`. **Run this once before using `predict.py` or `app.py`.**
-
-### 6. Run from the command line
-```bash
-python predict.py
-```
-
-### 7. Run the web app
-```bash
-streamlit run app.py
-```
-Then open **http://localhost:8501** in your browser.
-
----
-
-## 🔄 How It Works, Step by Step
-
-1. **User Input** — you type a news statement, e.g. *"Elon Musk became Prime Minister of India"*.
-2. **Text Preprocessing** — lowercase conversion, URL/whitespace/noise cleanup (`utils.py`).
-3. **Live Check** (`live_check.py`) — searches NewsAPI's `/v2/everything` endpoint for real coverage. If found → **REAL**, with matching articles and sources shown.
-4. **ML Fallback** (if live check is off/unavailable/finds nothing):
-   - TF-IDF converts text into weighted word/word-pair frequency features.
-   - Logistic Regression outputs REAL/FAKE with a confidence score.
-5. **Red-Flag Phrase Check** — sensational phrases are flagged for transparency, shown alongside the verdict.
-
----
-
-## 🧪 Example Testing
-
-**Fake example**
-- Input: `Virat Kohli won the FIFA World Cup`
-- Output: `FAKE NEWS DETECTED`
-
-**Real example**
-- Input: `Lionel Messi won the FIFA World Cup 2022`
-- Output: `REAL NEWS — verified from live sources`
-
----
-
-## 📚 About the ML Training Dataset
-
-`generate_dataset.py` builds a synthetic 900-row dataset spanning politics, health, tech, sports, business, and more, so the model learns the *style* differences between measured/factual writing and sensational/conspiratorial writing. It's a demo dataset written for this project, not scraped real articles.
-
-To swap in a real public dataset for the ML layer (Kaggle "Fake and Real News" / ISOT, or the [LIAR dataset](https://www.cs.ucsb.edu/~william/data/liar_dataset.zip)): download the CSV, make sure it has `text` and `label` columns (or edit `train.py` to match your columns), replace `dataset/news.csv`, then re-run `python train.py`.
-
----
-
-## 🎯 Advantages
-
-- ✅ Real-time news verification, not just style-guessing
-- ✅ ML prediction with a transparent confidence score
-- ✅ Red-flag phrase transparency
-- ✅ Streamlit web UI + command-line mode
-- ✅ Works fully offline too (ML-only mode) if no API key is set
-- ✅ Honest about its own limits instead of overclaiming
-
-## ⚠️ Limitations
-
-- Breaking news may not be indexed by NewsAPI immediately
-- Regional/non-English coverage can be limited
-- Satire is hard for any system to catch reliably
-- A "not found" live-check result means *unconfirmed*, not *proven fake*
-- No fake news detection system — including this one — can perfectly verify every claim worldwide
-
-## 🔮 Future Improvements
-
-- Fine-tuned transformer (BERT) model instead of TF-IDF + Logistic Regression
-- Multilingual detection
-- Source-credibility scoring
-- Larger, real-world training dataset
-- Browser extension for one-click checking
-
----
-
-## 🎓 Common Questions a Teacher Might Ask
-
-**What algorithm did you use?**
-TF-IDF + Logistic Regression for the offline model, plus a live NewsAPI search layer for real-time verification.
-
-**What's your accuracy?**
-Printed by `train.py` on a held-out 20% test split — reflects performance on this project's dataset, not a universal figure. Manually tested on 10 brand-new sentences not seen in training: 10/10.
-
-**Why not a neural network / BERT?**
-Simpler, faster to train, no GPU needed, easy to explain end-to-end — right for this scope; stated as a future improvement.
-
-**Why does it need internet / an API key?**
-A purely offline model can only recognize writing style — it has no way to know about real events. The live layer is what lets it check "any news from anywhere," which was the actual goal.
-
-**Why use NewsAPI specifically?**
-It's free, has no credit card requirement, and covers 150,000+ sources — good coverage for a live-verification layer without cost.
-
-**How would you improve it further?**
-A larger real-world training set, more engineered features (source credibility, punctuation ratios), a paid/higher-limit news API, or a fine-tuned transformer.
-
----
-
-## 🔁 Retraining After Editing the Dataset
-
-```bash
-python train.py
-```
-Overwrites `fake_news_model.pkl` with the newly trained model.
-
----
-
-## 🔗 Useful Links
-
-- [NewsAPI — free registration](https://newsapi.org/register)
-- [NewsAPI documentation](https://newsapi.org/docs)
-- [Streamlit documentation](https://docs.streamlit.io/)
-- [scikit-learn TF-IDF Vectorizer docs](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
-- [scikit-learn Logistic Regression docs](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
-- [Kaggle "Fake and Real News" dataset](https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset)
-- [LIAR dataset](https://www.cs.ucsb.edu/~william/data/liar_dataset.zip)
-
----
-
-## 📜 License
-
-This project is developed for educational and research purposes.
+⭐ If you find this project useful, consider giving it a star on GitHub.
