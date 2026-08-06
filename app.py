@@ -31,13 +31,17 @@ def load_model():
     return joblib.load(MODEL_PATH)
 
 
+
 try:
 
     model = load_model()
 
-except:
+except Exception:
 
-    st.error("Model not found. Run train.py first.")
+    st.error(
+        "Model not found. Run train.py first."
+    )
+
     st.stop()
 
 
@@ -102,6 +106,7 @@ demo_news = [
 ]
 
 
+
 selected = st.selectbox(
     "🎯 Demo News",
     ["Custom News"] + demo_news
@@ -135,13 +140,22 @@ if st.button(
 
     if not news.strip():
 
-        st.warning("Please enter news")
+        st.warning(
+            "Please enter news"
+        )
+
         st.stop()
 
 
 
-    with st.spinner("Analyzing..."):
+    with st.spinner(
+        "Analyzing..."
+    ):
 
+
+        # -----------------------------
+        # ML Prediction
+        # -----------------------------
 
         cleaned = clean_text(news)
 
@@ -156,7 +170,7 @@ if st.button(
         )[0]
 
 
-        confidence = max(probability)*100
+        confidence = max(probability) * 100
 
 
 
@@ -170,19 +184,33 @@ if st.button(
 
 
 
-        fact_status, facts, fact_score = check_fact(news)
+        # -----------------------------
+        # Fact Checking
+        # -----------------------------
+
+        fact_status, facts, fact_score = check_fact(
+            news
+        )
 
 
 
-        live_result = search_news(news)
+        # -----------------------------
+        # Live News Search
+        # -----------------------------
+
+        live_result = search_news(
+            news
+        )
 
 
-        articles=[]
+        articles = []
 
 
-        if isinstance(live_result,dict):
+        if isinstance(live_result, dict):
 
-            if live_result.get("status")=="success":
+            if live_result.get(
+                "status"
+            ) == "success":
 
                 articles = live_result.get(
                     "articles",
@@ -191,45 +219,68 @@ if st.button(
 
 
 
-    # =============================
-    # FINAL DECISION FIX
-    # =============================
+        # -----------------------------
+        # FINAL DECISION ENGINE
+        # -----------------------------
 
 
-    final_result = ml_result
-
-
-    # Fact database gets priority
-
-    if fact_score >= 60:
-
-        final_result = "REAL"
+        final_result = ml_result
 
 
 
-    for item in facts:
+        # Fact database highest priority
 
-        fact = item["fact"].lower()
+        if fact_status == "true":
 
-
-        if (
-
-            "not" in fact
-            or "false" in fact
-            or "did not" in fact
-            or "never" in fact
-
-        ):
-
-            final_result = "FAKE"
+            final_result = "REAL"
 
 
 
+        elif fact_score >= 35:
+
+            final_result = "REAL"
+
+
+
+        # Negative facts override
+
+        for item in facts:
+
+            fact = item["fact"].lower()
+
+
+            if any(word in fact for word in [
+
+                "false",
+                "fake",
+                "not true",
+                "never",
+                "did not"
+
+            ]):
+
+                final_result = "FAKE"
+
+
+
+        # Live verified news
+
+        if articles:
+
+            final_result = "REAL"
+
+
+
+    # -----------------------------
+    # RESULT
+    # -----------------------------
 
 
     st.divider()
 
-    st.subheader("📊 Final Result")
+    st.subheader(
+        "📊 Final Result"
+    )
 
 
 
@@ -261,11 +312,11 @@ if st.button(
     )
 
 
+
     if facts:
 
 
         for item in facts[:5]:
-
 
             st.info(
 f"""
@@ -294,34 +345,50 @@ Match Score: {item['score']}%
 
 
 
-    if fact_score < 40 or len(facts)==0:
+    try:
 
 
-        explanation = ai_analysis(
-            news,
-            final_result,
-            confidence,
-            facts,
-            articles
+        if fact_score < 40 or len(facts) == 0:
+
+
+            explanation = ai_analysis(
+                news,
+                final_result,
+                confidence,
+                facts,
+                articles
+            )
+
+
+        else:
+
+
+            explanation = generate_explanation(
+                news,
+                final_result,
+                confidence,
+                facts,
+                articles
+            )
+
+
+        st.write(
+            explanation
         )
 
 
-    else:
+    except Exception as e:
 
-
-        explanation = generate_explanation(
-            news,
-            final_result,
-            confidence,
-            facts,
-            articles
+        st.warning(
+            "AI explanation unavailable."
         )
 
+        st.write(e)
 
 
-    st.write(explanation)
 
 
+    # Sources
 
     if articles:
 
@@ -335,6 +402,7 @@ Match Score: {item['score']}%
 
         for article in articles[:5]:
 
+
             st.markdown(
 f"""
 **{article.get('title')}**
@@ -346,39 +414,6 @@ Source: {article.get('source')}
 ---
 """
             )
-
-
-
-    st.divider()
-
-    st.subheader(
-        "🔗 Related Information"
-    )
-
-
-    text=news.lower()
-
-
-
-    if "cricket" in text or "virat" in text:
-
-        st.write(
-            "🏏 ICC Cricket: https://www.icc-cricket.com"
-        )
-
-
-    if "football" in text or "fifa" in text:
-
-        st.write(
-            "⚽ FIFA: https://www.fifa.com"
-        )
-
-
-    if "tesla" in text or "elon" in text:
-
-        st.write(
-            "🚀 Tesla: https://www.tesla.com"
-        )
 
 
 
